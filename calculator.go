@@ -34,9 +34,6 @@ SEE ALSO
 `
 	switch argCount := len(os.Args[1:]); argCount {
 	case 0:
-		fmt.Println("No parameters given, assuming interractive mode")
-		fmt.Println("For now check out sub 4 5, which results in: ", sub(4, 5))
-		fmt.Println("Now we will print out what you type")
 		interactive()
 	case 1:
 		fmt.Println("Assume interractive calculator then.")
@@ -63,15 +60,45 @@ SEE ALSO
 
 func interactive() {
 	var number1, number2 float64
-	dataentry := bufio.NewReader(os.Stdin)
-	info, _ := dataentry.ReadString('\n')
-	fmt.Println("This is what you typed: ", "\n", info)
-	fmt.Println("Please enter an number")
+	var operation int64
+	operationquery := `Please enter a number for the type of calculation you want
+
+1 add
+2 subract
+3 multiply
+4 divide
+`
+	// dataentry := bufio.NewReader(os.Stdin)
+	// info, _ := dataentry.ReadString('\n')
+	// fmt.Println("This is what you typed: ", "\n", info)
+	fmt.Println(operationquery)
+	operation = fetchinteger()
+	//fmt.Println("You want to do operation number, ", operation)
+	fmt.Println("Please enter the first number")
 	number1 = fetchnumber()
 	fmt.Println("Please enter the second number")
 	number2 = fetchnumber()
 	fmt.Println("These are the two numbers you entered ", number1, number2)
 	fmt.Println("The sum of these two numbers is ", add(number1, number2))
+	switch operation {
+	case 1:
+		fmt.Println("This answer is ", add(number1, number2))
+	case 2:
+		fmt.Println("This is your answer, ", sub(number1, number2))
+	case 3:
+		fmt.Println("This is your answer, ", mul(number1, number2))
+	case 4:
+		fmt.Println("This is your answer, ", div(number1, number2))
+	}
+}
+
+func fetchinteger() int64 {
+	var number string
+	getdata := bufio.NewReader(os.Stdin)
+	data, _ := getdata.ReadString('\n')
+	number = strings.TrimSuffix(data, "\n")
+	inumber, _ := strconv.ParseInt(number, 10, 64)
+	return inumber
 }
 
 func fetchnumber() float64 {
