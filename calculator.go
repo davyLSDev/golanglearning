@@ -2,6 +2,8 @@ package main
 
 import (
 	// a great way to remember to import a package before using it       _ "fmt"
+
+	"bufio"
 	"fmt"
 	"os"
 )
@@ -9,6 +11,8 @@ import (
 // names for operands here: https://math.stackexchange.com/questions/975541/what-are-the-formal-names-of-operands-and-results-for-basic-operations
 
 func main() {
+
+	dataentry := bufio.NewReader(os.Stdin)
 	helptext := `NAME
 	calculator
 Usage
@@ -32,6 +36,9 @@ SEE ALSO
 	case 0:
 		fmt.Println("No parameters given, assuming interractive mode")
 		fmt.Println("For now check out sub 4 5, which results in: ", sub(4, 5))
+		fmt.Println("Now we will print out what you type")
+		info, _ := dataentry.ReadString('\n')
+		fmt.Println("This is what you typed: ", "\n", info)
 	case 1:
 		fmt.Println("Assume interractive calculator then.")
 		fmt.Println("For testing purposes, add 1 2, which results in: ", add(1, 2))
@@ -53,6 +60,10 @@ SEE ALSO
 	default:
 		fmt.Println(helptext)
 	}
+}
+
+func interactive() {
+
 }
 
 func add(augend, addend int) int {
