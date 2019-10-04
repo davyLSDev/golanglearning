@@ -19,14 +19,14 @@ Description
 AUTHOR
 	Written by Dawson Tennant
 REPORTING BUGS
-	are you kidding?
+	Are you kidding?
 COPYRIGHT
 	Copyright (c) 2019 Free Software Foundation, Inc.  License GPLv3+: GNU
 	GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 	This is free software: you are free  to  change  and  redistribute  it.
 	here is NO WARRANTY, to the extent permitted by law.
 SEE ALSO
-	nothing to see here, move along now
+	Nothing to see here, move along now.
 `
 	switch argCount := len(os.Args[1:]); argCount {
 	case 0:
