@@ -11,8 +11,6 @@ import (
 // names for operands here: https://math.stackexchange.com/questions/975541/what-are-the-formal-names-of-operands-and-results-for-basic-operations
 
 func main() {
-
-	dataentry := bufio.NewReader(os.Stdin)
 	helptext := `NAME
 	calculator
 Usage
@@ -37,8 +35,7 @@ SEE ALSO
 		fmt.Println("No parameters given, assuming interractive mode")
 		fmt.Println("For now check out sub 4 5, which results in: ", sub(4, 5))
 		fmt.Println("Now we will print out what you type")
-		info, _ := dataentry.ReadString('\n')
-		fmt.Println("This is what you typed: ", "\n", info)
+		interactive()
 	case 1:
 		fmt.Println("Assume interractive calculator then.")
 		fmt.Println("For testing purposes, add 1 2, which results in: ", add(1, 2))
@@ -63,7 +60,9 @@ SEE ALSO
 }
 
 func interactive() {
-
+	dataentry := bufio.NewReader(os.Stdin)
+	info, _ := dataentry.ReadString('\n')
+	fmt.Println("This is what you typed: ", "\n", info)
 }
 
 func add(augend, addend int) int {
