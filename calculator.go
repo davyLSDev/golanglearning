@@ -6,6 +6,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
+	"strings"
 )
 
 // names for operands here: https://math.stackexchange.com/questions/975541/what-are-the-formal-names-of-operands-and-results-for-basic-operations
@@ -60,9 +62,24 @@ SEE ALSO
 }
 
 func interactive() {
+	var number1, number2 float64
 	dataentry := bufio.NewReader(os.Stdin)
 	info, _ := dataentry.ReadString('\n')
 	fmt.Println("This is what you typed: ", "\n", info)
+	fmt.Println("Please enter an number")
+	number1 = fetchnumber()
+	fmt.Println("Please enter the second number")
+	number2 = fetchnumber()
+	fmt.Println("These are the two numbers you entered ", number1, number2)
+}
+
+func fetchnumber() float64 {
+	var number string
+	getdata := bufio.NewReader(os.Stdin)
+	data, _ := getdata.ReadString('\n')
+	number = strings.TrimSuffix(data, "\n")
+	fnumber, _ := strconv.ParseFloat(number, 64)
+	return fnumber
 }
 
 func add(augend, addend int) int {
