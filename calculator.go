@@ -71,6 +71,7 @@ func interactive() {
 	fmt.Println("Please enter the second number")
 	number2 = fetchnumber()
 	fmt.Println("These are the two numbers you entered ", number1, number2)
+	fmt.Println("The sum of these two numbers is ", add(number1, number2))
 }
 
 func fetchnumber() float64 {
@@ -82,19 +83,19 @@ func fetchnumber() float64 {
 	return fnumber
 }
 
-func add(augend, addend int) int {
+func add(augend, addend float64) float64 {
 	return augend + addend
 }
 
-func sub(minuend, subtrahend int) int {
+func sub(minuend, subtrahend float64) float64 {
 	return minuend - subtrahend
 }
 
-func mul(multiplier, multiplicand int) int {
+func mul(multiplier, multiplicand float64) float64 {
 	return multiplier * multiplicand
 }
 
-func div(numerator, denominator int) int {
+func div(numerator, denominator float64) float64 {
 	return numerator / denominator
 }
 
