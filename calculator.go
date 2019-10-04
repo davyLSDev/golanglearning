@@ -9,6 +9,25 @@ import (
 // names for operands here: https://math.stackexchange.com/questions/975541/what-are-the-formal-names-of-operands-and-results-for-basic-operations
 
 func main() {
+	helptext := `NAME
+	calculator
+Usage
+	./calculator [mathematical operation] operand1 operand2
+Description
+	Return the requested calculation result to standard output
+
+AUTHOR
+	Written by Dawson Tennant
+REPORTING BUGS
+	are you kidding?
+COPYRIGHT
+	Copyright (c) 2019 Free Software Foundation, Inc.  License GPLv3+: GNU
+	GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+	This is free software: you are free  to  change  and  redistribute  it.
+	here is NO WARRANTY, to the extent permitted by law.
+SEE ALSO
+	nothing to see here, move along now
+`
 	switch argCount := len(os.Args[1:]); argCount {
 	case 0:
 		fmt.Println("No parameters given, assuming interractive mode")
@@ -32,7 +51,7 @@ func main() {
 		fmt.Println("Dividing function 1 / 2 is: ", div(1, 2))
 		fmt.Println("********************************************")
 	default:
-		fmt.Println("Probably best to give instructions on how to use this")
+		fmt.Println(helptext)
 	}
 }
 
@@ -50,4 +69,8 @@ func mul(multiplier, multiplicand int) int {
 
 func div(numerator, denominator int) int {
 	return numerator / denominator
+}
+
+func help() {
+	fmt.Println("")
 }

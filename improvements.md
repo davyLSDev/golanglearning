@@ -23,3 +23,7 @@ adfj: command not found
 * **I-4.** refactor to make a library
 * **I-5.** add a gui to make a four banger calculator
 * **I-6** make the interractive calculator portion work
+* **I-7** ~~make help section~~
+
+## Reference
+[cli tool ideas](https://blog.rapid7.com/2016/08/04/build-a-simple-cli-tool-with-golang/)
