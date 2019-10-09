@@ -1,4 +1,4 @@
-// bubblesort has a worst case scenario of needing n-1 iterations
+// bubblesort worst case scenario needs n-1 iterations to sort numbers
 
 package main
 
@@ -8,20 +8,24 @@ import (
 	"time"      // to generate a random seed
 )
 
-//func sort
-
-func main() {
-	var max, min, numberOfNumbers int
-	numberOfNumbers = 10
-	numsToSortSlice := make([]int, numberOfNumbers)
-	const maxItterations = 10 - 1 // array size minus 1
+// fill the slice "numsToSort" with random numbers from 1 to 1000
+func randomFill(sliceSize int) []int {
+	var max, min int
 	max = 1000
 	min = 1
+	numsToSort := make([]int, sliceSize)
 	rand.Seed(time.Now().UTC().UnixNano())
-	for index := 0; index < numberOfNumbers; index++ {
-		numsToSortSlice[index] = (rand.Intn(max-min) + min)
+	for index := 0; index < sliceSize; index++ {
+		numsToSort[index] = (rand.Intn(max-min) + min)
 	}
-	fmt.Println("Slice before sorting is \n", numsToSortSlice)
+	return numsToSort
+}
+
+func main() {
+	var numberOfNumbers int
+	numberOfNumbers = 10
+	const maxItterations = 10 - 1 // slice size minus 1
+	fmt.Println("Slice before sorting is \n", randomFill(numberOfNumbers))
 }
 
 /* Ref: https://stackoverflow.com/questions/12321133/golang-random-number-generator-how-to-seed-properly
