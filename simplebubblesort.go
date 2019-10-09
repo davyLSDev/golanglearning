@@ -21,11 +21,32 @@ func randomFill(sliceSize int) []int {
 	return numsToSort
 }
 
+func simpleSort(sortedNumbers []int) []int {
+	var temp int
+	maxItterations := len(sortedNumbers) - 1 // worst case scenario
+	numbersToSort := maxItterations
+
+	for itterations := 0; itterations < maxItterations; itterations++ {
+		for index := 0; index < numbersToSort; index++ {
+			if sortedNumbers[index] > sortedNumbers[index+1] {
+				temp = sortedNumbers[index]
+				sortedNumbers[index] = sortedNumbers[index+1]
+				sortedNumbers[index+1] = temp
+			}
+		}
+	}
+
+	return sortedNumbers
+}
+
 func main() {
 	var numberOfNumbers int
 	numberOfNumbers = 10
+	numbers := make([]int, numberOfNumbers)
 	const maxItterations = 10 - 1 // slice size minus 1
-	fmt.Println("Slice before sorting is \n", randomFill(numberOfNumbers))
+	numbers = randomFill(numberOfNumbers)
+	fmt.Println("Slice before sorting is \n", numbers)
+	fmt.Println("Slice after sort is \n", simpleSort(numbers))
 }
 
 /* Ref: https://stackoverflow.com/questions/12321133/golang-random-number-generator-how-to-seed-properly
