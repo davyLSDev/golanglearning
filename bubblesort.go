@@ -1,5 +1,5 @@
 /* bubblesort worst case scenario needs n-1 iterations to sort numbers
-The sort can be sped up if it completes before n-1 itterations by
+The sort can be sped up if it completes before n-1 iterations by
 stopping the outer loop */
 
 package main
@@ -24,13 +24,13 @@ func randomFill(sliceSize int) []int {
 }
 
 func simpleSort(sortedNumbers []int) []int {
-	var temp, itterationCount, swapsNeeded int
-	maxItterations := len(sortedNumbers) - 1 // worst case scenario
-	numbersToSort := maxItterations
+	var temp, iterationCount, swapsNeeded int
+	maxIterations := len(sortedNumbers) - 1 // worst case scenario
+	numbersToSort := maxIterations
 	swapsNeeded = 0
 
-	for itterations := 0; itterations < maxItterations; itterations++ {
-		itterationCount++
+	for iterations := 0; iterations < maxIterations; iterations++ {
+		iterationCount++
 		for index := 0; index < numbersToSort; index++ {
 			if sortedNumbers[index] > sortedNumbers[index+1] {
 				temp = sortedNumbers[index]
@@ -44,7 +44,7 @@ func simpleSort(sortedNumbers []int) []int {
 		}
 		swapsNeeded = 0 // reset the swap count
 	}
-	fmt.Println("The number of itterations needed was ", itterationCount)
+	fmt.Println("The number of iterations needed was ", iterationCount)
 	return sortedNumbers
 }
 
@@ -52,7 +52,7 @@ func main() {
 	var numberOfNumbers int
 	numberOfNumbers = 10
 	numbers := make([]int, numberOfNumbers)
-	const maxItterations = 10 - 1 // slice size minus 1
+	const maxIterations = 10 - 1 // slice size minus 1
 	numbers = randomFill(numberOfNumbers)
 	fmt.Println("Slice before sorting is \n", numbers)
 	fmt.Println("Slice after sort is \n", simpleSort(numbers))
