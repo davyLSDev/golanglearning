@@ -24,7 +24,7 @@ func randomFill(sliceSize int) []int {
 }
 
 func simpleSort(sortedNumbers []int) []int {
-	var temp, iterationCount, swapsNeeded int
+	var iterationCount, swapsNeeded int
 	maxIterations := len(sortedNumbers) - 1 // worst case scenario
 	numbersToSort := maxIterations
 	swapsNeeded = 0
@@ -33,9 +33,9 @@ func simpleSort(sortedNumbers []int) []int {
 		iterationCount++
 		for index := 0; index < numbersToSort; index++ {
 			if sortedNumbers[index] > sortedNumbers[index+1] {
-				temp = sortedNumbers[index]
-				sortedNumbers[index] = sortedNumbers[index+1]
-				sortedNumbers[index+1] = temp
+				// using parallel, or simultaneous assignment to avoid a temporary variable
+				sortedNumbers[index], sortedNumbers[index+1] =
+					sortedNumbers[index+1], sortedNumbers[index+1]
 				swapsNeeded++
 			}
 		}
