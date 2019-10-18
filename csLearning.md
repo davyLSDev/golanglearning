@@ -80,4 +80,10 @@
 * [speedup](https://www.targetprocess.com/articles/speed-in-software-development/)
 
 ## Cheatsheets
+
 * [golang](http://golangbot.com/)
+
+## Good overview of golang
+
+* [Golang tut](https://www.golangprograms.com/go-language.html)
+* [seems to have helpful illustrations of concepts and syntax](https://www.geeksforgeeks.org/named-return-parameters-in-golang/)
