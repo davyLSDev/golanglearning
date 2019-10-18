@@ -49,8 +49,6 @@
 * [go by example)[https://golangbyexample.com/]
 * [golang patterns][http://blog.ralch.com/tutorial/design-patterns/golang-design-patterns/]
 * [idiomatic go patterns, maybe better?](https://github.com/jbuberel/go-patterns]
-* [go by example][https://golangbyexample.com/]
-* [perhaps better examples?][https://github.com/jbuberel/go-patterns]
 * [creating a shared go routine for other languages](https://medium.com/learning-the-go-programming-language/calling-go-functions-from-other-languages-4c7d8bcc69bf)
 * [gogtk3](https://github.com/gotk3/gotk3)
 
@@ -74,7 +72,7 @@
 * [React 2](https://github.com/mewben/go-react-project)
 * [improve 1](https://dzone.com/articles/10-things-every-programmer-and-software-engineer-s)
 * [improve 2](https://www.quora.com/What-are-some-of-the-best-algorithms-which-every-good-programmers-should-know)
-* [improve 3](https://www.codementor.io/learn-programming/3-essential-algorithm-examples-you-should-know)
+* [improve 3]()
 * [This looks very comprehensive](https://github.com/mtdvio/every-programmer-should-know)
 
 ## Productivity in CS
