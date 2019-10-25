@@ -12,6 +12,7 @@ func main() {
 	Some thoughts about how to do this
 
 	- MVP, keep it simple: player starts as x (https://en.wikipedia.org/wiki/Tic-tac-toe)
+	- using ANSI/VT100 Terminal Control Escape Sequences (http://www.termsys.demon.co.uk/vtansi.htm)
 	- 3x3 array to keep the game board information
 	- random function to generate a random number
 	- time in seconds to seed the random number generator
@@ -41,4 +42,9 @@ func main() {
 
 	Your turn, choose a number to place your X
 	`)
+
+	// an example format for working with the screen: fmt.Println("\033[2J\033[25;10HHello")
+	// \033 is <ESC>
+	// \033[2J is clear screen
+	// \033[25;10H is set cursor home to row 25, and column 10
 }
