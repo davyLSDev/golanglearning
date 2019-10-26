@@ -22,7 +22,9 @@ import (
 
 func main() {
 	// Wait to implement restart()
-	display(0, (' '))
+	board := []byte{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+	// display(0, (' '))
+	display(board)
 	playerMark := byte('X')
 	robotMark := byte('O')
 	var location int
@@ -31,17 +33,20 @@ func main() {
 		_, err := fmt.Scanf("%d", &location)
 		fmt.Println(err)
 		mark := playerMark
-		display(location-1, mark)
+		board[location-1] = mark
+		display(board)
+		// display(location-1, mark)
 		mark = robotMark
 		location := ai()
-		display(location-1, mark)
+		board[location-1] = mark
+		display(board)
+		// display(location-1, mark)
 	}
 }
 
-func display(placement int, character byte) {
+//func display(placement int, character byte) {
+func display(gameboard []byte) {
 	clear := "\033[2J"
-	// x := byte('X')
-	// y := byte('Y')
 	row := 25
 	column := 1
 	message := []byte(`
@@ -56,7 +61,11 @@ Your turn, choose a number to place your X, and press <ENTER>`)
 	// index is the array to place X's and O's into the grid
 	// remember the index starts at 0
 	index := [9]int{1, 5, 9, 55, 59, 63, 109, 113, 117}
-	message[index[placement]] = character
+
+	for space := 0; space < 9; space++ {
+		message[index[space]] = gameboard[space]
+	}
+	// message[index[placement]] = character
 	output := strings.Join([]string{"\033[" + strconv.Itoa(row) + ";" + strconv.Itoa(column) + "H" + string(message)}, "+ ")
 	fmt.Println(clear, output)
 }
