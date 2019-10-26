@@ -29,6 +29,8 @@ func main() {
 
 func display() {
 	clear := "\033[2J"
+	x := byte('X')
+	y := byte('Y')
 	row := 25
 	column := 1
 	message := []byte(`
@@ -38,9 +40,16 @@ func display() {
 ---------        ---------
   |   |          1 | 2 | 3
 
-Your turn, choose a number to place your X.
-	`)
-
+Your turn, choose a number to place your X.`)
+	message[1] = 65
+	message[5] = 66
+	message[9] = 67
+	message[55] = 68
+	message[59] = ('H')
+	message[63] = ('I')
+	message[109] = ('J')
+	message[113] = x
+	message[117] = y
 	output := strings.Join([]string{"\033[" + strconv.Itoa(row) + ";" + strconv.Itoa(column) + "H" + string(message)}, "+ ")
 	fmt.Println(clear, output)
 }
