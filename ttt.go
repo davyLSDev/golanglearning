@@ -87,7 +87,6 @@ func main() {
 	}
 }
 
-//func display(placement int, character byte) {
 func display(gameboard, status []byte) {
 	clear := "\033[2J"
 	row := 23
@@ -137,12 +136,49 @@ func checkPlace(gameboard []byte, index int) (ok bool) {
 	return
 }
 
-func end(gameboard []byte) (tie, win bool, champ int) {
-	// // not sure why these have to be redefined ?
+func end(cell []byte) (tie, win bool, champ int) {
+	playerMark := byte('X')
+	robotMark := byte('O')
 	player := 1
-	// robot := 2
+	robot := 2
+	var scratches int // when the sum of this is 8, the game is a tie!
+	var playerMarkers int
+	var robotMarkers int
+	win = false
 	tie = false
-	win = true
-	champ = player
+
+	row1 := []int{0, 1, 2}
+	// row2 := []int{3, 4, 5}
+	// row3 := []int{6, 7, 8}
+	// col1 := []int{0, 3, 6}
+	// col2 := []int{1, 4, 7}
+	// col3 := []int{2, 5, 8}
+	// diag1 := []int{0, 4, 8}
+	// diag2 := []int{2, 4, 6}
+
+	scratches = 0
+	playerMarkers = 0
+	robotMarkers = 0
+
+	// this is repeatable code, need to consider how to refactor
+	for _, rowIndex := range row1 {
+		if cell[row1[rowIndex]] == playerMark {
+			playerMarkers++
+		}
+		if cell[row1[rowIndex]] == robotMark {
+			robotMarkers++
+		}
+		if playerMarkers == 3 || robotMarkers == 3 {
+			win = true
+			if playerMarkers == 3 {
+				champ = player
+			} else {
+				champ = robot
+			}
+		}
+		if playerMarkers > 0 && robotMarkers > 0 {
+			scratches++
+		}
+	}
 	return
 }
