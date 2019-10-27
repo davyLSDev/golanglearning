@@ -20,5 +20,10 @@ func main() {
 		for j, _ := range x {
 			fmt.Println(lines[i][j])
 		}
+		if i < 1 {
+			fmt.Println("  The first line dealt with")
+		} else {
+			fmt.Println("  Another line dealt with")
+		}
 	}
 }
