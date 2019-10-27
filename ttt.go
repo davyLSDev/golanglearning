@@ -12,6 +12,8 @@ import (
 
 func main() {
 	var location int
+	// player := 1
+	// robot := 2
 	playerMark := byte('X')
 	robotMark := byte('O')
 	board := []byte{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
@@ -20,9 +22,9 @@ func main() {
 	playerError := []byte(`Please enter a number between 1 to 9!`)
 	redo := []byte(`That space is taken, enter a different number and press <ENTER>`)
 	robotRedo := []byte(`Oh robot, try again!`)
-	// draw := []byte(`Game over, it's a draw!`)
-	// playerWins := (`Game over, you have won.`)
-	// robotWins := (`Game over, the robot won.`)
+	draw := []byte(`Game over, it's a draw!`)
+	playerWins := []byte(`Game over, you have won.`)
+	robotWins := []byte(`Game over, the robot won.`)
 
 	mark := playerMark
 	prompt := playerPrompt
@@ -66,6 +68,22 @@ func main() {
 				// display(board, prompt)
 			}
 		}
+
+		scratch, win, winner := end(board)
+		if scratch || win {
+			if win {
+				if winner == 1 {
+					prompt = playerWins
+				} else {
+					prompt = robotWins
+				}
+			} else {
+				scratch = true
+				prompt = draw
+			}
+			display(board, prompt)
+			break
+		}
 	}
 }
 
@@ -93,7 +111,7 @@ func display(gameboard, status []byte) {
 	// message[index[placement]] = character
 	output := strings.Join([]string{"\033[" + strconv.Itoa(row) + ";" + strconv.Itoa(column) + "H" + string(message) + string(status)}, "+ ")
 	fmt.Println(clear, output)
-	// fmt.Println(output)
+	// fmt.Println(output)family@bigbird:~/projects/golang/golanglearning$
 }
 
 func ai() (aiPlay int) {
@@ -116,5 +134,15 @@ func checkPlace(gameboard []byte, index int) (ok bool) {
 	if gameboard[index] == openPlace {
 		ok = true
 	}
+	return
+}
+
+func end(gameboard []byte) (tie, win bool, champ int) {
+	// // not sure why these have to be redefined ?
+	player := 1
+	// robot := 2
+	tie = false
+	win = true
+	champ = player
 	return
 }
