@@ -18,7 +18,7 @@ func main() {
 	playerPrompt := []byte(`Player's turn, choose a number to place your X, and press <ENTER>.`)
 	robotPrompt := []byte(`Robot's turn.`)
 	playerError := []byte(`Please enter a number between 1 to 9!`)
-	// redo := []byte(`That space is taken, enter a different number and press <ENTER>`)
+	redo := []byte(`That space is taken, enter a different number and press <ENTER>`)
 	// robotRedo := []byte(`Oh robot, try again!`)
 	// draw := []byte(`Game over, it's a draw!`)
 	// playerWins := (`Game over, you have won.`)
@@ -41,21 +41,21 @@ func main() {
 				prompt = playerError
 				display(board, prompt)
 			} else {
-				board[location-1] = mark
-				// display(board, prompt)
-				mark = robotMark
-				prompt = robotPrompt
+				if !checkPlace(board, location-1) {
+					prompt = redo
+					display(board, prompt)
+				} else {
+					board[location-1] = mark
+					// display(board, prompt)
+					mark = robotMark
+					prompt = robotPrompt
+				}
 			}
-			// board[location-1] = mark
-			// // display(board, prompt)
-			// mark = robotMark
-			// prompt = robotPrompt
 		}
 
 		if mark != playerMark {
 			display(board, prompt)
-			// time.Sleep(100 * time.Millisecond)
-			location := ai(board)
+			location := ai()
 			board[location-1] = mark
 			mark = playerMark
 			prompt = playerPrompt
@@ -91,7 +91,7 @@ func display(gameboard, status []byte) {
 	// fmt.Println(output)
 }
 
-func ai(gameboard []byte) (aiPlay int) {
+func ai() (aiPlay int) {
 	rand.Seed(time.Now().UTC().UnixNano())
 	testInteger := rand.Intn(9)
 	aiPlay = testInteger + 1
