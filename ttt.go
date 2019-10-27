@@ -10,44 +10,64 @@ import (
 	"time"
 )
 
-// func init() {
-// 	restart()
-// 	// fmt.Println("Do this first")
-// 	//	return 1
-// }
-
-// func restart() {
-// 	fmt.Println("Do this first")
-// }
-
 func main() {
-	// Wait to implement restart()
-	board := []byte{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
-	// display(0, (' '))
-	display(board)
+	var location int
 	playerMark := byte('X')
 	robotMark := byte('O')
-	var location int
+	board := []byte{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+	playerPrompt := []byte(`Player's turn, choose a number to place your X, and press <ENTER>.`)
+	robotPrompt := []byte(`Robot's turn.`)
+	playerError := []byte(`Please enter a number between 1 to 9!`)
+	// redo := []byte(`That space is taken, enter a different number and press <ENTER>`)
+	// robotRedo := []byte(`Oh robot, try again!`)
+	// draw := []byte(`Game over, it's a draw!`)
+	// playerWins := (`Game over, you have won.`)
+	// robotWins := (`Game over, the robot won.`)
+
+	mark := playerMark
+	prompt := playerPrompt
+	display(board, prompt)
+
+	// redoPrompt := redo
 
 	for {
-		_, err := fmt.Scanf("%d", &location)
-		fmt.Println(err)
-		mark := playerMark
-		board[location-1] = mark
-		display(board)
-		// display(location-1, mark)
-		mark = robotMark
-		location := ai()
-		board[location-1] = mark
-		display(board)
-		// display(location-1, mark)
+
+		display(board, prompt)
+		if mark != robotMark {
+			// _, err := fmt.Scanf("%d", &location)
+			// fmt.Println(err)
+			location = playerInput()
+			if location < 0 || location > 9 {
+				prompt = playerError
+				display(board, prompt)
+			} else {
+				board[location-1] = mark
+				// display(board, prompt)
+				mark = robotMark
+				prompt = robotPrompt
+			}
+			// board[location-1] = mark
+			// // display(board, prompt)
+			// mark = robotMark
+			// prompt = robotPrompt
+		}
+
+		if mark != playerMark {
+			display(board, prompt)
+			// time.Sleep(100 * time.Millisecond)
+			location := ai(board)
+			board[location-1] = mark
+			mark = playerMark
+			prompt = playerPrompt
+			// display(board, prompt)
+		}
 	}
 }
 
 //func display(placement int, character byte) {
-func display(gameboard []byte) {
+func display(gameboard, status []byte) {
 	clear := "\033[2J"
-	row := 25
+	row := 23
 	column := 1
 	message := []byte(`
   |   |          1 | 2 | 3
@@ -56,7 +76,7 @@ func display(gameboard []byte) {
 ---------        ---------
   |   |          7 | 8 | 9
 
-Your turn, choose a number to place your X, and press <ENTER>`)
+`)
 
 	// index is the array to place X's and O's into the grid
 	// remember the index starts at 0
@@ -66,11 +86,30 @@ Your turn, choose a number to place your X, and press <ENTER>`)
 		message[index[space]] = gameboard[space]
 	}
 	// message[index[placement]] = character
-	output := strings.Join([]string{"\033[" + strconv.Itoa(row) + ";" + strconv.Itoa(column) + "H" + string(message)}, "+ ")
+	output := strings.Join([]string{"\033[" + strconv.Itoa(row) + ";" + strconv.Itoa(column) + "H" + string(message) + string(status)}, "+ ")
 	fmt.Println(clear, output)
+	// fmt.Println(output)
 }
 
-func ai() int {
+func ai(gameboard []byte) (aiPlay int) {
 	rand.Seed(time.Now().UTC().UnixNano())
-	return rand.Intn(9)
+	testInteger := rand.Intn(9)
+	aiPlay = testInteger + 1
+	return
+}
+
+func playerInput() int {
+	var selection int
+	_, err := fmt.Scanf("%d", &selection)
+	fmt.Println(err)
+	return selection
+}
+
+func checkPlace(gameboard []byte, index int) (ok bool) {
+	openPlace := byte(' ')
+	ok = false
+	if gameboard[index] == openPlace {
+		ok = true
+	}
+	return
 }
