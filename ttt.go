@@ -147,14 +147,17 @@ func end(cell []byte) (tie, win bool, champ int) {
 	win = false
 	tie = false
 
+	lines := [8][3]int{
+		{0, 1, 2}, // row one
+		{3, 4, 5}, // row two
+		{6, 7, 8}, // row three
+		{0, 3, 6}, // column one
+		{1, 4, 7}, // column two
+		{2, 5, 8}, // column three
+		{0, 4, 8}, // diagonol one
+		{2, 4, 6}} // diagonal two
+
 	row1 := []int{0, 1, 2}
-	// row2 := []int{3, 4, 5}
-	// row3 := []int{6, 7, 8}
-	// col1 := []int{0, 3, 6}
-	// col2 := []int{1, 4, 7}
-	// col3 := []int{2, 5, 8}
-	// diag1 := []int{0, 4, 8}
-	// diag2 := []int{2, 4, 6}
 
 	scratches = 0
 	playerMarkers = 0
@@ -178,6 +181,18 @@ func end(cell []byte) (tie, win bool, champ int) {
 		}
 		if playerMarkers > 0 && robotMarkers > 0 {
 			scratches++
+		}
+	}
+
+	// just so no compiler errors, and making sure to use the lines array
+	for i, x := range lines {
+		for j, _ := range x {
+			fmt.Println(lines[i][j])
+		}
+		if i < 1 {
+			fmt.Println("  The first line dealt with")
+		} else {
+			fmt.Println("  Another line dealt with")
 		}
 	}
 	return
