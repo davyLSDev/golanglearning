@@ -19,7 +19,7 @@ func main() {
 	robotPrompt := []byte(`Robot's turn.`)
 	playerError := []byte(`Please enter a number between 1 to 9!`)
 	redo := []byte(`That space is taken, enter a different number and press <ENTER>`)
-	// robotRedo := []byte(`Oh robot, try again!`)
+	robotRedo := []byte(`Oh robot, try again!`)
 	// draw := []byte(`Game over, it's a draw!`)
 	// playerWins := (`Game over, you have won.`)
 	// robotWins := (`Game over, the robot won.`)
@@ -56,10 +56,15 @@ func main() {
 		if mark != playerMark {
 			display(board, prompt)
 			location := ai()
-			board[location-1] = mark
-			mark = playerMark
-			prompt = playerPrompt
-			// display(board, prompt)
+			if !checkPlace(board, location-1) {
+				prompt = robotRedo
+				display(board, prompt)
+			} else {
+				board[location-1] = mark
+				mark = playerMark
+				prompt = playerPrompt
+				// display(board, prompt)
+			}
 		}
 	}
 }
