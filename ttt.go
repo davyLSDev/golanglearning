@@ -157,20 +157,23 @@ func end(cell []byte) (tie, win bool, champ int) {
 		{0, 4, 8}, // diagonol one
 		{2, 4, 6}} // diagonal two
 
-	row1 := []int{0, 1, 2}
-
 	scratches = 0
 	playerMarkers = 0
 	robotMarkers = 0
 
-	// this is repeatable code, need to consider how to refactor
-	for _, rowIndex := range row1 {
-		if cell[row1[rowIndex]] == playerMark {
-			playerMarkers++
+	// Brute force logic one line at a time
+	for i, x := range lines {
+		for j, _ := range x {
+			//fmt.Println(lines[i][j])
+			if cell[lines[i][j]] == playerMark {
+				playerMarkers++
+			}
+			if cell[lines[i][j]] == robotMark {
+				robotMarkers++
+			}
 		}
-		if cell[row1[rowIndex]] == robotMark {
-			robotMarkers++
-		}
+
+		// after each line has been checked
 		if playerMarkers == 3 || robotMarkers == 3 {
 			win = true
 			if playerMarkers == 3 {
@@ -178,22 +181,14 @@ func end(cell []byte) (tie, win bool, champ int) {
 			} else {
 				champ = robot
 			}
+			return
 		}
+
 		if playerMarkers > 0 && robotMarkers > 0 {
 			scratches++
 		}
-	}
-
-	// just so no compiler errors, and making sure to use the lines array
-	for i, x := range lines {
-		for j, _ := range x {
-			fmt.Println(lines[i][j])
-		}
-		if i < 1 {
-			fmt.Println("  The first line dealt with")
-		} else {
-			fmt.Println("  Another line dealt with")
-		}
+		playerMarkers = 0
+		robotMarkers = 0
 	}
 	return
 }
