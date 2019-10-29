@@ -12,8 +12,6 @@ import (
 
 func main() {
 	var location int
-	// player := 1
-	// robot := 2
 	playerMark := byte('X')
 	robotMark := byte('O')
 	board := []byte{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
@@ -30,14 +28,10 @@ func main() {
 	prompt := playerPrompt
 	display(board, prompt)
 
-	// redoPrompt := redo
-
 	for {
 
 		display(board, prompt)
 		if mark != robotMark {
-			// _, err := fmt.Scanf("%d", &location)
-			// fmt.Println(err)
 			location = playerInput()
 			if location < 0 || location > 9 {
 				prompt = playerError
@@ -48,7 +42,6 @@ func main() {
 					display(board, prompt)
 				} else {
 					board[location-1] = mark
-					// display(board, prompt)
 					mark = robotMark
 					prompt = robotPrompt
 				}
@@ -65,7 +58,6 @@ func main() {
 				board[location-1] = mark
 				mark = playerMark
 				prompt = playerPrompt
-				// display(board, prompt)
 			}
 		}
 
@@ -110,7 +102,6 @@ func display(gameboard, status []byte) {
 	// message[index[placement]] = character
 	output := strings.Join([]string{"\033[" + strconv.Itoa(row) + ";" + strconv.Itoa(column) + "H" + string(message) + string(status)}, "+ ")
 	fmt.Println(clear, output)
-	// fmt.Println(output)family@bigbird:~/projects/golang/golanglearning$
 }
 
 func ai() (aiPlay int) {
