@@ -28,7 +28,6 @@ func main() {
 		{"", "a,-B,-B,a,-B,a,b,c,c,c,d"},
 	}
 
-	//	fmt.Println("Type of datasets is ", reflect.TypeOf(datasets))
 	for _, dataset := range datasets {
 		test := checkEquivalentKeypresses(dataset)
 		if test {
@@ -43,34 +42,30 @@ func checkEquivalentKeypresses(stringsToTest []string) (status bool) {
 	stringA := editString(stringsToTest[0])
 	stringB := editString(stringsToTest[1])
 	status = false
+	fmt.Println("stringA is ", stringA)
+	fmt.Println("stringB is ", stringB)
 	if stringA == stringB {
 		status = true
 	}
 	return status
 }
 
-func editString(startSequence string) (editedSequence string) {
-	var buildString, key string
-	//length := len(startSequence)
+func editString(startString string) (editedString string) {
+	var key string
 	separator := ","
 	backspace := "-B"
-	sliceSequence := strings.Split(startSequence, separator)
-	//	fmt.Println("sliceSequence is of type ", reflect.TypeOf(sliceSequence))
+	sliceSequence := strings.Split(startString, separator)
 
 	for _, keystroke := range sliceSequence {
-		//		fmt.Println("keystroke is of type ", reflect.TypeOf(keystroke))
 		key = string(keystroke)
-		buildStringLength := len(buildString)
+		editedStringLength := len(editedString)
 		if key != backspace {
-			buildString = buildString + key
+			editedString = editedString + key
 		} else {
-			if buildStringLength != 0 {
-				buildString = buildString[:buildStringLength-1]
+			if editedStringLength != 0 {
+				editedString = editedString[:editedStringLength-1]
 			}
 		}
 	}
-
-	fmt.Println("The built sequence is ", buildString)
-	editedSequence = startSequence
-	return editedSequence
+	return editedString
 }
