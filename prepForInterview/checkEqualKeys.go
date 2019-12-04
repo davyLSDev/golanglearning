@@ -31,9 +31,9 @@ func main() {
 	for _, dataset := range datasets {
 		test := checkEquivalentKeypresses(dataset)
 		if test {
-			fmt.Println("The two strings are equivalent")
+			fmt.Println("so, the two strings are equivalent.")
 		} else {
-			fmt.Println("The two strings are not equivalent")
+			fmt.Println("so, the two strings are not equivalent.")
 		}
 	}
 }
@@ -42,8 +42,8 @@ func checkEquivalentKeypresses(stringsToTest []string) (status bool) {
 	stringA := editString(stringsToTest[0])
 	stringB := editString(stringsToTest[1])
 	status = false
-	fmt.Println("stringA is ", stringA)
-	fmt.Println("stringB is ", stringB)
+	fmt.Println("The first string is ", stringA, "and the second is ", stringB)
+
 	if stringA == stringB {
 		status = true
 	}
