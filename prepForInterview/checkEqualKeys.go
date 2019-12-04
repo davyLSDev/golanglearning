@@ -1,6 +1,6 @@
 // checkEquivalentKeypresses is a function that takes an array containing
 // two strings where each string represents keypresses separated by commas.
-// A keypress can be either a printable character or a backspace 
+// A keypress can be either a printable character or a backspace
 // (represented by -B).
 // The function determines if the two strings of keypresses are equivalent.
 
@@ -18,15 +18,17 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 func main() {
-	datasets:= [][]string{
+	datasets := [][]string{
 		{"a,b,c,d", "a,b,c,c,-B,d"},
 		{"-B,-B,-B,c,c", "c,c"},
 		{"", "a,-B,-B,a,-B,a,b,c,c,c,d"},
 	}
-	
+
+	//	fmt.Println("Type of datasets is ", reflect.TypeOf(datasets))
 	for _, dataset := range datasets {
 		test := checkEquivalentKeypresses(dataset)
 		if test {
@@ -48,19 +50,27 @@ func checkEquivalentKeypresses(stringsToTest []string) (status bool) {
 }
 
 func editString(startSequence string) (editedSequence string) {
-	var buildSequence, key string
+	var buildString, key string
 	//length := len(startSequence)
+	separator := ","
 	backspace := "-B"
-	for _,keystroke := range startSequence {
+	sliceSequence := strings.Split(startSequence, separator)
+	//	fmt.Println("sliceSequence is of type ", reflect.TypeOf(sliceSequence))
+
+	for _, keystroke := range sliceSequence {
+		//		fmt.Println("keystroke is of type ", reflect.TypeOf(keystroke))
 		key = string(keystroke)
-		fmt.Println("Key ", key)
-		buildSequence = buildSequence + key
+		buildStringLength := len(buildString)
+		if key != backspace {
+			buildString = buildString + key
+		} else {
+			if buildStringLength != 0 {
+				buildString = buildString[:buildStringLength-1]
+			}
+		}
 	}
-	fmt.Println("The built sequence is ", buildSequence)
+
+	fmt.Println("The built sequence is ", buildString)
 	editedSequence = startSequence
-	if backspace != "" {
-		fmt.Println("simple if")
-	}
-	fmt.Println("Still no editing on the keystroke sequence")
 	return editedSequence
 }
