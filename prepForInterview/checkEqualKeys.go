@@ -38,9 +38,6 @@ func main() {
 }
 
 func checkEquivalentKeypresses(stringsToTest []string) (status bool) {
-//	fmt.Println("Strings to test are ", stringsToTest)
-//	fmt.Println("Edit the first string ", editString(stringsToTest[0]))
-//	fmt.Println("Edit the second string ", editString(stringsToTest[1]))
 	stringA := editString(stringsToTest[0])
 	stringB := editString(stringsToTest[1])
 	status = false
@@ -51,11 +48,19 @@ func checkEquivalentKeypresses(stringsToTest []string) (status bool) {
 }
 
 func editString(startSequence string) (editedSequence string) {
+	var buildSequence, key string
+	//length := len(startSequence)
 	backspace := "-B"
+	for _,keystroke := range startSequence {
+		key = string(keystroke)
+		fmt.Println("Key ", key)
+		buildSequence = buildSequence + key
+	}
+	fmt.Println("The built sequence is ", buildSequence)
+	editedSequence = startSequence
 	if backspace != "" {
 		fmt.Println("simple if")
 	}
-	editedSequence = startSequence
-	fmt.Println("No editing has been done on the string sequence")
+	fmt.Println("Still no editing on the keystroke sequence")
 	return editedSequence
 }
