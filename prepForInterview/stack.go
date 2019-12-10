@@ -63,7 +63,7 @@ func showStack(stack []int) {
 //func push(stack []int, maximumSize int, value int) (err string) {
 func push(value, maximumSize int) (err string) {
 	err = ""
-	currentStackSize := len(stack) - 1
+	currentStackSize := len(stack)
 	if currentStackSize == maximumSize {
 		err = "Stack overflow could occur"
 	} else {
