@@ -34,38 +34,43 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 )
 
 var stack []int
 
 func main() {
 	size := 10 // stack has a fixed size of some kind
-	var err string
+	var result, err string
 	var value int
 
+	showStack()
 	for i := 10; i < 22; i++ {
 		err := push(i, size)
-		fmt.Println("After the push, the stack size is ", len(stack), " with an error of ", err)
-		showStack(stack)
+		result = "Successfully pushed " + strconv.Itoa(i) + " onto the stack."
+		printResults(result, err)
 	}
+	showStack()
 
 	for j := 10; j < 22; j++ {
 		err, value = pop()
-		fmt.Println("The value popped off the stack is ", value, " while the error reported is ", err)
+		result = "The value popped of the stack is " + strconv.Itoa(value) + "."
+		printResults(result, err)
 	}
+	showStack()
 }
 
-func showStack(stack []int) {
+func showStack() {
 	fmt.Println("This is my stack now", stack)
 	return
 }
 
-//func push(stack []int, maximumSize int, value int) (err string) {
 func push(value, maximumSize int) (err string) {
 	err = ""
 	currentStackSize := len(stack)
 	if currentStackSize == maximumSize {
-		err = "Stack overflow could occur"
+		err = "Stack overflow!"
+		// return err
 	} else {
 		stack = append(stack, value)
 	}
@@ -75,11 +80,20 @@ func push(value, maximumSize int) (err string) {
 func pop() (err string, value int) {
 	err = ""
 	if len(stack) <= 0 {
-		err = "Stack underflow"
+		err = "Stack underflow!"
 		value = 0
 	} else {
 		value = stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
 	}
 	return err, value
+}
+
+func printResults(message, err string) {
+	if err != "" {
+		fmt.Println(err)
+	} else {
+		fmt.Println(message)
+	}
+	return
 }
