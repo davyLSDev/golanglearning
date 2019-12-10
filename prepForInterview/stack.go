@@ -36,27 +36,50 @@ import (
 	"fmt"
 )
 
+var stack []int
+
 func main() {
-	const stackSize = 10 // stack has a fixed size of some kind
-	var myStack []int
-	fmt.Println("This is going to test the stack function / method")
-	push(myStack, 55, stackSize)
-	showStack(myStack)
+	size := 10 // stack has a fixed size of some kind
+	var err string
+	var value int
+
+	for i := 10; i < 22; i++ {
+		err := push(i, size)
+		fmt.Println("After the push, the stack size is ", len(stack), " with an error of ", err)
+		showStack(stack)
+	}
+
+	for j := 10; j < 22; j++ {
+		err, value = pop()
+		fmt.Println("The value popped off the stack is ", value, " while the error reported is ", err)
+	}
 }
 
-func showStack(stackNow []int) {
-	fmt.Println("This is my stack now", stackNow)
+func showStack(stack []int) {
+	fmt.Println("This is my stack now", stack)
 	return
 }
 
-func push(stackNow []int, valueToPush int, stackSize int) (err string) {
+//func push(stack []int, maximumSize int, value int) (err string) {
+func push(value, maximumSize int) (err string) {
 	err = ""
-	stackPointer := len(stackNow)
-	if stackPointer >= stackSize {
-		err = "Stack overflow"
+	currentStackSize := len(stack) - 1
+	if currentStackSize == maximumSize {
+		err = "Stack overflow could occur"
 	} else {
-		fmt.Println(stackPointer)
-		// stackNow[stackPointer] = valueToPush
+		stack = append(stack, value)
 	}
 	return err
+}
+
+func pop() (err string, value int) {
+	err = ""
+	if len(stack) <= 0 {
+		err = "Stack underflow"
+		value = 0
+	} else {
+		value = stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+	}
+	return err, value
 }
