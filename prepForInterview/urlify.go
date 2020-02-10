@@ -8,7 +8,6 @@ package main
 
 import (
 	"fmt"
-	// "str"
 )
 
 func main() {
@@ -21,7 +20,18 @@ func main() {
 }
 
 func urlify(input string, length int) string {
-	urlifiedStr := "Jo%20Blow"
-//	urlifiedStrLength := len(initialStr)
+	urlSequence := "%20"
+	urlifiedStr := ""
+	var nextChars string
+
+	for character := 0; character < length; character++ { // if you do character == loop doesn't do anything
+		nextChars = input[character:character+1]
+		if input[character:character+1] == " " {
+			nextChars = urlSequence
+		}
+		fmt.Println("next characters is", nextChars)
+		urlifiedStr = urlifiedStr + nextChars
+		fmt.Println("This is loop number", character)
+	}
 	return urlifiedStr
 }
