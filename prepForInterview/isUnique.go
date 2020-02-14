@@ -29,10 +29,20 @@ https://stackoverflow.com/questions/43843477/scanln-in-golang-doesnt-accept-whit
 	}
 }
 
-// here is where the real work happens
+/* here is where the real work happens
+the headChar at headCharIdx is the current character to test against all remaining
+characters in the given string
+*/
 func isUnique(inputString string) bool {
+	unique := true
 	stringLength := len(inputString)
-	fmt.Println("This string is",stringLength,"characters long")
-
-	return false
+	headCharIdx := 0
+//	fmt.Println("This string is",stringLength,"characters long")
+	for charIdx := (headCharIdx+1); charIdx < stringLength; charIdx++ {
+		if inputString[headCharIdx] == inputString[charIdx] {
+			unique = false
+			break
+		}
+	}
+	return unique
 }
