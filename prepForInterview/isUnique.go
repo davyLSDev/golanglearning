@@ -36,12 +36,14 @@ characters in the given string
 func isUnique(inputString string) bool {
 	unique := true
 	stringLength := len(inputString)
-	headCharIdx := 0
+//	headCharIdx := 0
 //	fmt.Println("This string is",stringLength,"characters long")
-	for charIdx := (headCharIdx+1); charIdx < stringLength; charIdx++ {
-		if inputString[headCharIdx] == inputString[charIdx] {
-			unique = false
-			break
+	for headCharIdx := 0; headCharIdx < (stringLength-1); headCharIdx++ {
+		for charIdx := (headCharIdx+1); charIdx < stringLength; charIdx++ {
+			if inputString[headCharIdx] == inputString[charIdx] {
+				unique = false
+				break
+			}
 		}
 	}
 	return unique
