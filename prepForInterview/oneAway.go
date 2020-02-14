@@ -19,17 +19,43 @@ func main() {
 	// }
 	aString = getString("Enter the first string")
 	bString = getString("Enter the next string")
-	fmt.Println("This is your first string", aString)
-	fmt.Println("This is your second string", bString)
+	if oneAway(aString, bString) {
+		fmt.Println("The strings are one away or less")
+	} else {
+		fmt.Println("The strings are more than one away")
+	}
+
 }
 
 /* here is where the real work happens
-
-
-func oneAway(firstString, secondString string) {
-
-}
+   Edits are:
+   1) insert a character
+   2) remove a character
+   3) replacea a character
 */
+func oneAway(firstString, secondString string) bool {
+	var isOneAway bool
+	isOneAway = false
+	firstStringLength := len(firstString)
+	secondStringLength := len(secondString)
+	// clearly the strings are more than one edit away
+	if abs(firstStringLength-secondStringLength) > 1 {
+		return isOneAway
+	}
+	// clearly the strings are one or less than one edit away
+	if firstString == secondString {
+		isOneAway = true
+	}
+	return isOneAway
+}
+
+func abs(number int) int {
+	if number < 0 {
+		return -number
+	} else {
+		return number
+	}
+}
 
 func getString(prompt string) string {
 	var stringEntered string
