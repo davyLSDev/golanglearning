@@ -10,6 +10,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 )
 
 // this is just a wrapper to test out the function
@@ -32,8 +33,11 @@ func compress(initialString string) (finalString string) {
 		if currentCharacter == lastCharacter {
 			characterCount++
 		} else {
-			finalString = finalString + string(currentCharacter) + string(characterCount)
+			finalString = finalString + string(currentCharacter) + strconv.Itoa(characterCount)
 			fmt.Println("Debug, characterCount is", characterCount)
+			fmt.Println("Attmept to stringify characterCount is", strconv.Itoa(characterCount))
+			//			fmt.Println("This is the correct way to convert integer to string", strconv.Itoa(characterCount))
+			characterCount = 0
 		}
 		lastCharacter = currentCharacter
 
