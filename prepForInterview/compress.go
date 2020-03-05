@@ -16,42 +16,44 @@ import (
 // this is just a wrapper to test out the function
 func main() {
 	promptA := "Enter a string to compress"
-	//	lineA := getline.Fetch(promptA)
 	lineA := Fetch(promptA)
-	fmt.Println(lineA)
 	fmt.Println("The result of compressing your input string is >", compress(lineA))
 }
 
 func compress(initialString string) (finalString string) {
+	finalString = ""
 	initialLength := len(initialString)
-	var currentCharacter, lastCharacter string
-	characterCount := 1 // duplicate characters
+	var currentCharacter string
+	previousCharacter := ""
+	characterCount := 0 // the number of characters for any given character sequence in the initial string
 
 	for characterIdx := 0; characterIdx < initialLength; characterIdx++ {
 		currentCharacter = string(initialString[characterIdx])
 
-		if currentCharacter == lastCharacter {
-			characterCount++
-		} else {
-			finalString = finalString + string(currentCharacter) + strconv.Itoa(characterCount)
-			fmt.Println("Debug, characterCount is", characterCount)
-			fmt.Println("Attmept to stringify characterCount is", strconv.Itoa(characterCount))
-			//			fmt.Println("This is the correct way to convert integer to string", strconv.Itoa(characterCount))
-			characterCount = 0
+		// for first character in the string
+		if previousCharacter == "" {
+			previousCharacter = currentCharacter
 		}
-		lastCharacter = currentCharacter
 
-		if initialLength == len(finalString) {
+		if currentCharacter == previousCharacter {
+			characterCount++
+
+			if characterIdx+1 == initialLength { // ensure string is printed out
+				finalString = finalString + string(currentCharacter) + strconv.Itoa(characterCount) // proper way to convert integer to string
+			}
+
+		} else {
+			finalString = finalString + string(previousCharacter) + strconv.Itoa(characterCount)
+			characterCount = 1
+		}
+		if initialLength <= len(finalString) { // compression otherwise would produce longer string
 			finalString = initialString
 			break
 		}
+		previousCharacter = currentCharacter
 
 	}
 
-	/*	if finalLength+1 == initialLength {
-			finalString = initialString
-		}
-	*/
 	return finalString
 }
 
