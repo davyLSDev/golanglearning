@@ -38,10 +38,6 @@ func main() {
 func Fetch(prompt string) (lineOfCharacters string) {
 
 	fmt.Println(prompt)
-	/* Note to include whitespace when fetching input, you need to use bufio.Scanner, see
-			   https://stackoverflow.com/questions/43843477/scanln-in-golang-doesnt-accept-whitespace
-	   	   	   	fmt.Scanln(&aString)
-	*/
 	keyScanner := bufio.NewScanner(os.Stdin)
 	if keyScanner.Scan() {
 		lineOfCharacters = keyScanner.Text()
