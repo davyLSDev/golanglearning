@@ -15,7 +15,7 @@ import (
 
 const FINISH = true
 const AGAIN = false
-const PAUSE = 2 * time.Second
+const PAUSE = 1 * time.Second
 const NOPAUSE = 0 * time.Second
 const CLEAR = "\033[2J"
 const PROMTP1 = CLEAR + `
@@ -41,10 +41,20 @@ const ACTION1 = CLEAR + "Print out the linked list"
 const ACTION2 = CLEAR + "Fetch a value to add to the list"
 const ACTION3 = CLEAR + "Exit now"
 
+type Node struct {
+	data string
+	next *Node
+}
+
+type List struct {
+	int length
+	head *Node
+}
+
 func main() {
 	var action, choice, value string
 	loopState := AGAIN
-	pauseTime := PAUSE //NOPAUSE is default
+	pauseTime := PAUSE
 
 	for {
 		choice = Fetch(PROMTP1)
