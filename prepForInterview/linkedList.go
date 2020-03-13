@@ -15,6 +15,7 @@ import (
 
 const FINISH = true
 const AGAIN = false
+const LONGPAUSE = 5 * time.Second
 const PAUSE = 1 * time.Second
 const NOPAUSE = 0 * time.Second
 const CLEAR = "\033[2J"
@@ -47,8 +48,22 @@ type Node struct {
 }
 
 type List struct {
-	int length
-	head *Node
+	length int
+	head   *Node
+}
+
+// Methods
+
+func (l *List) Debug() {
+	fmt.Println("This is a DEBUG printout of the linked list, but not implemented yet")
+}
+
+func (l *List) Printout() {
+	fmt.Println("This is a printout of the linked list, but not implemented yet")
+}
+
+func (l *List) AddItem(i string) {
+	fmt.Println("Add a new item to the end of the list", i)
 }
 
 func main() {
@@ -56,17 +71,24 @@ func main() {
 	loopState := AGAIN
 	pauseTime := PAUSE
 
+	var myList List
+
 	for {
 		choice = Fetch(PROMTP1)
 		switch choice {
 		case "0":
 			action = ACTION0
+			myList.Debug()
+			time.Sleep(pauseTime)
 		case "1":
 			action = ACTION1
+			myList.Printout()
+			time.Sleep(pauseTime)
 		case "2":
 			action = ACTION2
 			value = Fetch(PROMPT2)
-			fmt.Println(CLEAR+"Your value was", value, "it will now be added to the list")
+			//			fmt.Println(CLEAR+"Your value was", value, "it will now be added to the list")
+			myList.AddItem(value)
 			time.Sleep(pauseTime)
 		case "3":
 			action = ACTION3
@@ -85,6 +107,7 @@ func main() {
 
 	fmt.Println(action)
 	time.Sleep(pauseTime)
+
 }
 
 func Fetch(prompt string) (lineOfCharacters string) {
