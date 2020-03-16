@@ -60,10 +60,26 @@ func (l *List) Debug() {
 
 func (l *List) Printout() {
 	fmt.Println("This is a printout of the linked list, but not implemented yet")
+	list := l.head
+	for list != nil {
+		fmt.Printf("%v ->", list.data)
+		list = list.next
+	}
+	fmt.Println()
 }
 
-func (l *List) AddItem(i string) {
-	fmt.Println("Add a new item to the end of the list", i)
+func (l *List) AddItem(newNode *Node) {
+	if l.length == 0 {
+		l.head = newNode
+	} else {
+		currentNode := l.head
+		for currentNode.next != nil {
+			currentNode = currentNode.next
+		}
+		currentNode.next = newNode
+	}
+
+	l.length++
 }
 
 func main() {
@@ -71,7 +87,7 @@ func main() {
 	loopState := AGAIN
 	pauseTime := PAUSE
 
-	var myList List
+	myList := &List{}
 
 	for {
 		choice = Fetch(PROMTP1)
@@ -88,7 +104,8 @@ func main() {
 			action = ACTION2
 			value = Fetch(PROMPT2)
 			//			fmt.Println(CLEAR+"Your value was", value, "it will now be added to the list")
-			myList.AddItem(value)
+			node := Node{data: value}
+			myList.AddItem(&node)
 			time.Sleep(pauseTime)
 		case "3":
 			action = ACTION3
