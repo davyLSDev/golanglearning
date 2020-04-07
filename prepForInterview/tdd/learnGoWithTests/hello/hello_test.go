@@ -27,3 +27,11 @@ func TestGreet(t *testing.T) {
 		}
 	}
 }
+
+func TestProgram(tp *testing.T) {
+	got := Program()
+	want := programExitOk
+	if got != want {
+		tp.Errorf("got %q want %q", got, want)
+	}
+}
