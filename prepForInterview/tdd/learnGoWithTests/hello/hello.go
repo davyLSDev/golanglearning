@@ -1,6 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
+
+var name string
 
 const (
 	cs = iota // Czech
@@ -34,11 +39,22 @@ var languageLookup = []struct {
 func Greet(name string, language int) (translated string) {
 	var message string
 	message = languageLookup[language].greeting
-	translated = message + ", Dawson"
+	translated = message + ", " + name
 	return translated
 }
 
-func main() {
+const (
+	programExitOk   = 0
+	programExitFail = 1
+)
+
+func main() { os.Exit(Program()) }
+
+// Program the testable main
+func Program() (exitcode int) {
 	var languageCode int
-	fmt.Println(Greet("Dawson", languageCode))
+	exitcode = programExitOk
+	name = "Dawson"
+	fmt.Println(Greet(name, languageCode))
+	return exitcode
 }

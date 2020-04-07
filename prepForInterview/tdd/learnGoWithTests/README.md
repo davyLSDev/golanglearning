@@ -35,6 +35,30 @@ go test -coverprofile=coverage.out
 go tool cover -html=coverage.out
 ```
 
+[abstraction from main for better testing](https://pace.dev/blog/2020/02/12/why-you-shouldnt-use-func-main-in-golang-by-mat-ryer.html)
 
+But, it is not valid to write something like
 
+```
+func main() error {
+	if err := Main(); err != nil {
+		return err
+	}
+	return nil
+}
+```
 
+The "main()" function in golang must not have arguments or return values.
+
+[here is a way to do that](https://stackoverflow.com/questions/4278293/how-do-i-return-from-func-main-in-go)
+
+```
+func main() { os.Exit(mainReturnWithCode()) }
+
+func mainReturnWithCode() int {
+    // do stuff, defer functions, etc.
+    return exitcode // a suitable exit code
+}
+```
+
+However, this will only work if you ensure that rest of the code does not call os.Exit() anywhere, like flag.ExitOnError, log.Fatalf(), etc.

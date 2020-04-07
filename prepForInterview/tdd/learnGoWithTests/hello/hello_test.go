@@ -20,8 +20,8 @@ var allLanguagesTest = []struct {
 
 func TestGreet(t *testing.T) {
 	for _, tt := range allLanguagesTest {
-		got := Greet("Dawson", tt.languageCode)
-		want := tt.translatedGreeting + ", Dawson"
+		got := Greet(name, tt.languageCode)
+		want := tt.translatedGreeting + ", " + name
 		if got != want {
 			t.Errorf("got %q want %q", got, want)
 		}
