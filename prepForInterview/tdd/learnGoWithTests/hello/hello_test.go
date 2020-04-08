@@ -18,20 +18,20 @@ var allLanguagesTest = []struct {
 	{pt, "Olá"},       // Portugese
 }
 
-func TestGreet(t *testing.T) {
+func TestGreet(tg *testing.T) {
 	for _, tt := range allLanguagesTest {
 		got := Greet(name, tt.languageCode)
 		want := tt.translatedGreeting + ", " + name
 		if got != want {
-			t.Errorf("got %q want %q", got, want)
+			tg.Errorf("got %q want %q", got, want)
 		}
 	}
 }
 
-func TestProgram(tp *testing.T) {
+func TestProgram(t *testing.T) {
 	got := Program()
 	want := programExitOk
 	if got != want {
-		tp.Errorf("got %q want %q", got, want)
+		t.Errorf("got %q want %q", got, want)
 	}
 }

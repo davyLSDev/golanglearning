@@ -12,3 +12,10 @@
 
 * Testify helps you to simplify the way you write assertions within your test cases.
 * Testify can also be used to mock objects within your testing framework to ensure you aren’t calling production endpoints whenever you test.
+
+## godoc
+
+Very useful utility which serves up go documentation for my system
+
+godoc -http :8000
+then navigate to http://localhost:8000/pkg/testing ... or wherever
