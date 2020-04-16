@@ -8,3 +8,14 @@ func Sum(numbers []int) int {
 	}
 	return sum
 }
+
+// SumAll takes integer arrays and returns the sums of all the elements of each array in an array
+func SumAll(numbersToSum ...[]int) (sums []int) {
+	lengthOfNumbers := len(numbersToSum)
+	sums = make([]int, lengthOfNumbers) // Note, there is an error in the tutorial "sums := ..."
+
+	for idx, numbers := range numbersToSum {
+		sums[idx] = Sum(numbers)
+	}
+	return
+}

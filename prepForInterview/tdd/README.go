@@ -15,6 +15,19 @@
 
 ## Notes
 
+### about golang
+
+```
+Go does not let you use equality operators with slices. The tutorial author suggests
+that I could write a function to iterate over each got and want slice and check their
+values, but for convenience, we can use "reflect.DeepEqual" which is useful for seeing
+if any two variables are the same.
+if got != want {
+```
+
+* reflect.DeepEqual is *NOT* type safe, the code will still compile even if you do s/th
+silly. For instance comparing a slice to a string will still compile; this makes no sense.
+
 ### godoc
 
 Very useful utility which serves up go documentation for my system
@@ -25,3 +38,7 @@ then navigate to http://localhost:8000/pkg/testing ... or wherever
 ### commit whenever you can get tests to pass
 
 In case you mess something up, but maybe do not push to master right away.
+
+* You can add [Examples](https://blog.golang.org/examples) in your test code which is also testable (or optionally not).package tdd
+The example will not be executed it the "// Output: 6", for example is missing
+* type "godoc -http:8000" if your code is within the $GOPATH/src/.github.-com/{your_id} your example documentation will be published to localhost:8000/pkg/
