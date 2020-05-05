@@ -2,6 +2,12 @@
 
 [URL](https://github.com/quii/learn-go-with-tests)
 
+## Left off at
+
+* the book is an epub in the directory
+* the last page was 99 (finished up on arrays)
+* where to pick up next. Review slices on the blog page first.
+
 ## Some other resources
 
 [tips](https://medium.com/@matryer/5-simple-tips-and-tricks-for-writing-unit-tests-in-golang-619653f90742)
