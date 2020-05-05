@@ -28,6 +28,8 @@ if got != want {
 * reflect.DeepEqual is *NOT* type safe, the code will still compile even if you do s/th
 silly. For instance comparing a slice to a string will still compile; this makes no sense.
 
+* make allows to create a slice with a starting capacity
+
 ### godoc
 
 Very useful utility which serves up go documentation for my system

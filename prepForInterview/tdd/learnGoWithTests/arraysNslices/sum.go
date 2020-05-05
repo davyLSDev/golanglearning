@@ -19,3 +19,14 @@ func SumAll(numbersToSum ...[]int) (sums []int) {
 	}
 	return
 }
+
+// SumAllTails takes the integer arrays and returns the sums of all the elements except the "head" of each array and puts these sums into an array */
+func SumAllTails(numbersToSum ...[]int) []int {
+	var sums []int
+	for _, numbers := range numbersToSum {
+		tail := numbers[1:]
+		sums = append(sums, Sum(tail))
+	}
+
+	return sums
+}
