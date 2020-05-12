@@ -68,3 +68,11 @@ func mainReturnWithCode() int {
 ```
 
 However, this will only work if you ensure that rest of the code does not call os.Exit() anywhere, like flag.ExitOnError, log.Fatalf(), etc.
+
+## Run specific tests
+
+See structsMethodsInterface/shapes_test.go for more information about how to set that up. To run, for instance, only the rectangle test, type
+
+```
+go test -run TestArea/Rectangle
+```
